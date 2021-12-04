@@ -12,6 +12,8 @@ def main():
         format.s_print(files)
 
         input("> ")
+        input("> ")
+        input("> ")
 
 
 if __name__ == '__main__':
