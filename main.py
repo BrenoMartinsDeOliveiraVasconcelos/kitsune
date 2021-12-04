@@ -45,7 +45,7 @@ def main():
                     cd_to = "/".join(check_cd)
                     current_path = cd_to
                 else:
-                    print("\033[31mNOT A DIRECTORY!")
+                    print("\033[31mNot a directory!")
             else:
                 print("\033[31mDoes not exist.")
 
