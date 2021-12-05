@@ -11,13 +11,24 @@ def main():
     # Gets the current current_path
     current_path = os.getcwd()
 
+    # Variable to save old value of current_path
+    old_path = ""
+
+    # Pre-definition of files
+    files = []
+
     while True:
         # If the current path is an empty string, current path is defined to "/"
         if current_path == "":
             current_path = "/"
 
         # Get the files and prints
-        files = os.listdir(current_path)
+        try:
+            files = os.listdir(current_path)
+        except PermissionError:
+            # In case of no permission to do so, current_path is back upped
+            current_path = old_path
+            software.error(0)
 
         format.s_print(files)
 
@@ -28,6 +39,7 @@ def main():
         cmd, arr = raw_cmd[0], raw_cmd[1:]
 
         if cmd == "cd":
+            old_path = current_path
             cd_to = current_path+"/"+"".join(arr)
             # Checks if the current_path exists
             if os.path.exists(cd_to):
@@ -45,17 +57,27 @@ def main():
                     cd_to = "/".join(check_cd)
                     current_path = cd_to
                 else:
-                    print("\033[31mNot a directory!")
+                    # Not a directory
+                    software.error(1)
             else:
-                print("\033[31mDoes not exist.")
+                # Doesn't exist
+                software.error(2)
         else:
-            # If no command, it will check if input is a valid path
+            # If there is no command, it will check if input is a valid path
             if os.path.exists(" ".join(raw_cmd)):
                 # Then check if it is a folder
                 if os.path.isdir(" ".join(raw_cmd)):
-                    # ... and cd to it.
-                    current_path = " ".join(raw_cmd)
+                    # ... and cd to it. (if not ".." or "."
+                    if " ".join(raw_cmd) not in ["..", "."]:
+                        old_path = current_path
+                        current_path = " ".join(raw_cmd)
+                else:
+                    # Case the path is not a valid directory, error is given.
+                    software.error(1)
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        software.error(-1)
