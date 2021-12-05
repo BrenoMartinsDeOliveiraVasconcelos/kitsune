@@ -13,7 +13,7 @@ def s_print(array: list) -> None:
     # Prints each item of "array"
     for value in array:
         # if index is even then it will print at right of the terminal
-        # end parameter is set as empty string so it won't break line after printing
+        # end parameter is set as empty string, so it won't break line after printing
         if mathplus.iseven(index):
             print(f"\033[33m{value:<20}\033[0m", end="")
 

@@ -1,6 +1,11 @@
 import os
 from userlib import format, software
 import json
+from sys import argv as sys_args
+import readline
+
+
+readline.clear_history()
 
 
 def main():
@@ -10,6 +15,9 @@ def main():
 
     # Gets the current current_path
     current_path = os.getcwd()
+    if len(sys_args) > 1:
+        if not " ".join(sys_args[1:]).startswith("--"):
+            current_path = " ".join(sys_args[1:])
 
     # Variable to save old value of current_path
     old_path = ""
@@ -29,11 +37,18 @@ def main():
             # In case of no permission to do so, current_path is back upped
             current_path = old_path
             software.error(0)
+        except FileNotFoundError:
+            software.error(2)
+            current_path = os.getcwd()
 
         format.s_print(files)
 
         # Gets user input, then gets the command and args
-        raw_cmd = software.command(input("> "))
+        user_input = input("> ")
+        while user_input == "":
+            user_input = input("INSERT A VALID INPUT: ")
+
+        raw_cmd = software.command(user_input)
 
         # Saving the commands and the args into different variables
         cmd, arr = raw_cmd[0], raw_cmd[1:]
