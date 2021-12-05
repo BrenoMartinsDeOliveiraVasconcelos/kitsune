@@ -12,7 +12,7 @@ def main():
     current_path = os.getcwd()
 
     while True:
-        # If the current path is a empty string, current path is defined to "/"
+        # If the current path is an empty string, current path is defined to "/"
         if current_path == "":
             current_path = "/"
 
@@ -48,6 +48,13 @@ def main():
                     print("\033[31mNot a directory!")
             else:
                 print("\033[31mDoes not exist.")
+        else:
+            # If no command, it will check if input is a valid path
+            if os.path.exists(" ".join(raw_cmd)):
+                # Then check if it is a folder
+                if os.path.isdir(" ".join(raw_cmd)):
+                    # ... and cd to it.
+                    current_path = " ".join(raw_cmd)
 
 
 if __name__ == '__main__':
