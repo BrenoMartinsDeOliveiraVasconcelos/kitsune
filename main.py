@@ -44,7 +44,8 @@ def main():
         if cmd == "cd":
             old_path = current_path
             cd_to = current_path+"/"+raw_args
-            # Checks if the current_path exists
+            # Checks if the cd target exists
+            # Checking if is different from "/"
             if os.path.exists(cd_to) and raw_args != "/":
                 # Check if it is a folder or not
                 if os.path.isdir(cd_to):
@@ -73,6 +74,8 @@ def main():
         elif cmd == "mkdir":
             # Create a folder
             os.mkdir(f"{current_path}/{' '.join(arr)}")
+        elif cmd == "clear":
+            software.clear()
         else:
             # If there is no command, it will check if input is a valid path
             if os.path.exists(" ".join(raw_cmd)):

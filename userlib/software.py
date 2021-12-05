@@ -1,3 +1,7 @@
+import os
+import platform
+
+
 def command(string: str) -> list:
     """
     Return a list containing the command and its args
@@ -34,3 +38,12 @@ def error(e_id: int) -> None:
     # Pause the program to show the error if not eid -1.
     if e_id >= 0:
         input("ENTER to continue")
+
+
+def clear() -> None:
+    """
+    Clear the console
+    :return: None
+    """
+
+    os.system("clear" if platform.system() != "Windows" else "cls")
