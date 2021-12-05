@@ -2,6 +2,15 @@ import os
 import platform
 
 
+def pause() -> None:
+    """
+    Pause
+
+    :return: None
+    """
+    input("\033[0mENTER to continue.")
+
+
 def command(string: str) -> list:
     """
     Return a list containing the command and its args
@@ -37,7 +46,7 @@ def error(e_id: int) -> None:
 
     # Pause the program to show the error if not eid -1.
     if e_id >= 0:
-        input("ENTER to continue")
+        pause()
 
 
 def clear() -> None:

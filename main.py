@@ -73,9 +73,13 @@ def main():
                     software.error(2)
         elif cmd == "mkdir":
             # Create a folder
-            os.mkdir(f"{current_path}/{' '.join(arr)}")
+            os.mkdir(f"{current_path}/{raw_args}")
         elif cmd == "clear":
             software.clear()
+        elif cmd == "path":
+            # Show the current path
+            print(f"Current path: {current_path}")
+            software.pause()
         else:
             # If there is no command, it will check if input is a valid path
             if os.path.exists(" ".join(raw_cmd)):
