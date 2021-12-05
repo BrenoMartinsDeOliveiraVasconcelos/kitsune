@@ -38,11 +38,14 @@ def main():
         # Saving the commands and the args into different variables
         cmd, arr = raw_cmd[0], raw_cmd[1:]
 
+        # Raw args
+        raw_args = " ".join(arr)
+
         if cmd == "cd":
             old_path = current_path
-            cd_to = current_path+"/"+"".join(arr)
+            cd_to = current_path+"/"+raw_args
             # Checks if the current_path exists
-            if os.path.exists(cd_to):
+            if os.path.exists(cd_to) and raw_args != "/":
                 # Check if it is a folder or not
                 if os.path.isdir(cd_to):
                     # Then check if cd input is '..' or '.' or none.
@@ -60,8 +63,16 @@ def main():
                     # Not a directory
                     software.error(1)
             else:
-                # Doesn't exist
-                software.error(2)
+                # Doesn't exist only if the path is not real
+                if os.path.exists(raw_args):
+                    if os.path.isdir(raw_args):
+                        old_path = current_path
+                        current_path = raw_args
+                else:
+                    software.error(2)
+        elif cmd == "mkdir":
+            # Create a folder
+            os.mkdir(f"{current_path}/{' '.join(arr)}")
         else:
             # If there is no command, it will check if input is a valid path
             if os.path.exists(" ".join(raw_cmd)):
