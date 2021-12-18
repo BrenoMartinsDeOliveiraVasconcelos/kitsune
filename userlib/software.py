@@ -43,6 +43,8 @@ def error(e_id: int) -> None:
         print("Not a directory.")
     elif e_id == 2:
         print("Specified path doesn't exist!")
+    elif e_id == 3:
+        print("Already exists.")
 
     # Pause the program to show the error if not eid -1.
     if e_id >= 0:
