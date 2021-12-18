@@ -97,10 +97,16 @@ def main():
                 # create a file
                 elif arr[0] == "file":
                     open(end_path, "w+").close()
+            elif cmd == "file":
+                target = f"{current_path}/{arr[1]}"
+                # write on a file
+                if arr[0] == "write":
+                    open(target, "w").write(" ".join(arr[2:]))
+                # append
+                elif arr[0] == "append":
+                    open(target, "a").write(" ".join(arr[2:]))
             elif cmd == "exit":
                 exit()
-            elif cmd == "clear":
-                software.clear()
             elif cmd == "path":
                 # Show the current path
                 print(f"Current path: {current_path}")
@@ -127,6 +133,8 @@ def main():
             software.error(3)
         except IsADirectoryError:
             software.error(4)
+        except OSError:
+            software.error(5)
 
         software.clear()
 
