@@ -1,4 +1,5 @@
 import os
+import shutil
 from userlib import format, software
 import json
 from sys import argv as sys_args
@@ -105,6 +106,24 @@ def main():
                 # append
                 elif arr[0] == "append":
                     open(target, "a").write(" ".join(arr[2:]))
+                elif arr[0] == "read":
+                    print("\n".join(open(target, "r").readlines()))
+                    software.pause()
+            elif cmd == "copy":
+                # copy files and directories
+                source = current_path+f"/{arr[0]}"
+                target = " ".join(arr[1:])
+                if target[0] != "/":
+                    target = current_path+f"/{target}"
+                if os.path.isdir(source):
+                    shutil.copytree(source, target)
+                else:
+                    shutil.copy(source, target)
+            elif cmd == "remove":
+                if not os.path.isdir(raw_args):
+                    os.remove(raw_args)
+                else:
+                    shutil.rmtree(raw_args)
             elif cmd == "exit":
                 exit()
             elif cmd == "path":
@@ -135,6 +154,8 @@ def main():
             software.error(4)
         except OSError:
             software.error(5)
+        except IndexError:
+            software.error(6)
 
         software.clear()
 

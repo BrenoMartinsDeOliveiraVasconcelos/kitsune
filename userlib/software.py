@@ -31,6 +31,7 @@ def error(e_id: int) -> None:
     3 - Already exists
     4 - Is a directory
     5 - Invalid argument
+    6 - Too few arguments
 
     :param e_id: error code
     :return: Nothing but lines on the console
@@ -52,6 +53,8 @@ def error(e_id: int) -> None:
         print("Is a directory.")
     elif e_id == 5:
         print("Invalid argument")
+    elif e_id == 6:
+        print("Too few arguments.")
 
     # Pause the program to show the error if not eid -1.
     if e_id >= 0:
