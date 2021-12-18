@@ -28,6 +28,8 @@ def error(e_id: int) -> None:
     0 - Permission denied
     1 - Not a directory
     2 - Doesn't exist
+    3 - Already exists
+    4 - Is a directory
 
     :param e_id: error code
     :return: Nothing but lines on the console
@@ -45,6 +47,8 @@ def error(e_id: int) -> None:
         print("Specified path doesn't exist!")
     elif e_id == 3:
         print("Already exists.")
+    elif e_id == 4:
+        print("Is a directory.")
 
     # Pause the program to show the error if not eid -1.
     if e_id >= 0:

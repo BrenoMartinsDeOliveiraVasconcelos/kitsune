@@ -88,9 +88,17 @@ def main():
                             current_path = raw_args
                     else:
                         software.error(2)
-            elif cmd == "mkdir":
+            elif cmd == "make":
+                # string with the final path
+                end_path = f"{current_path}/{' '.join(arr[1:])}"
                 # Create a folder
-                os.mkdir(f"{current_path}/{raw_args}")
+                if arr[0] == "dir":
+                    os.mkdir(end_path)
+                # create a file
+                elif arr[0] == "file":
+                    open(end_path, "w+").close()
+            elif cmd == "exit":
+                exit()
             elif cmd == "clear":
                 software.clear()
             elif cmd == "path":
@@ -117,6 +125,9 @@ def main():
             software.error(2)
         except FileExistsError:
             software.error(3)
+        except IsADirectoryError:
+            software.error(4)
+
         software.clear()
 
 
