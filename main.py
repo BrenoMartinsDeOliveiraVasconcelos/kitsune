@@ -98,7 +98,7 @@ def main():
                 # create a file
                 elif arr[0] == "file":
                     open(end_path, "w+").close()
-            elif cmd == "file":
+            elif cmd == "touch":
                 target = f"{current_path}/{arr[1]}"
                 # write on a file
                 if arr[0] == "write":
