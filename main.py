@@ -3,6 +3,7 @@ from userlib import format, software
 import json
 from sys import argv as sys_args
 import readline
+import platform
 
 
 readline.clear_history()
@@ -26,7 +27,7 @@ def main():
 
     while True:
         try:
-            print(f"KITSUNE PROJECT\nv{info['build']} - DEV: {info['dev']}")
+            print(f"KITSUNE PROJECT\nv{info['build']} - DEV: {info['dev']}\n{platform.system()}")
             # If the current path is an empty string, current path is defined to "/"
             if current_path == "":
                 current_path = "/"
