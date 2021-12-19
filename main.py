@@ -108,7 +108,10 @@ def main():
                             old_path = current_path
                             current_path = raw_args
                     else:
-                        software.error(2)
+                        if raw_args != "~":
+                            software.error(2)
+                        else:
+                            current_path = "/home/" + user
             elif cmd == "make":
                 # string with the final path
                 end_path = f"{current_path}/{' '.join(arr[1:])}"
@@ -127,7 +130,7 @@ def main():
                 elif arr[0] == "append":
                     open(target, "a").write(" ".join(arr[2:]))
                 elif arr[0] == "read":
-                    print("\n".join(open(target, "r").readlines()))
+                    print("".join(open(target, "r").readlines()))
                     software.pause()
             elif cmd == "copy":
                 # copy files and directories
