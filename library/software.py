@@ -32,6 +32,7 @@ def error(e_id: int) -> None:
     4 - Is a directory
     5 - Invalid argument
     6 - Too few arguments
+    7 - Invalid codification
 
     :param e_id: error code
     :return: Nothing but lines on the console
@@ -40,7 +41,7 @@ def error(e_id: int) -> None:
     print(f"\033[31m", end="")
 
     if e_id == -1:
-        print("Aborted.")
+        print("Aborted.\033[0m")
     elif e_id == 0:
         print("Permission denied!")
     elif e_id == 1:
@@ -55,6 +56,8 @@ def error(e_id: int) -> None:
         print("Invalid argument")
     elif e_id == 6:
         print("Too few arguments.")
+    elif e_id == 7:
+        print("Invalid file codification.")
 
     # Pause the program to show the error if not eid -1.
     if e_id >= 0:

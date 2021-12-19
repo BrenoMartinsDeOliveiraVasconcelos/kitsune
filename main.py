@@ -130,7 +130,21 @@ def main():
                 elif arr[0] == "append":
                     open(target, "a").write(" ".join(arr[2:]))
                 elif arr[0] == "read":
-                    print("".join(open(target, "r").readlines()))
+                    # read the file
+                    index = -1
+                    while True:
+                        index += 1
+                        codecs = ["utf-8", "latin1", "utf8", "iso-88691-1",
+                                  "mac_cyrilic", "mac_greek", "mac_iceland",
+                                  "mac_latin2", "mac_roman", "mac_turkish"]
+                        try:
+                            print("".join(open(target, "r", encoding=codecs[index]).readlines()))
+                            break
+                        except UnicodeError:
+                            pass
+                        except IndexError:
+                            software.error(7)
+                            break
                     software.pause()
             elif cmd == "copy":
                 # copy files and directories
