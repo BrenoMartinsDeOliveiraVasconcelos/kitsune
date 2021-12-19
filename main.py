@@ -120,10 +120,13 @@ def main():
                 else:
                     shutil.copy(source, target)
             elif cmd == "remove":
-                if not os.path.isdir(raw_args):
-                    os.remove(raw_args)
+                target = raw_args
+                if not target.startswith("/"):
+                    target = current_path+"/"+raw_args
+                if not os.path.isdir(target):
+                    os.remove(target)
                 else:
-                    shutil.rmtree(raw_args)
+                    shutil.rmtree(target)
             elif cmd == "exit":
                 exit()
             elif cmd == "path":
