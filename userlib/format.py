@@ -24,15 +24,15 @@ def s_print(array: list, path: str) -> None:
         if os.path.isdir(f"{path}/{value}"):
             mime_symbol = "+"
         elif mime_main == "text":
-            mime_symbol = "w"
+            mime_symbol = "t"
         elif mime_main == "image":
-            mime_symbol = "o"
+            mime_symbol = "i"
         elif mime_main == "audio":
-            mime_symbol = ">"
+            mime_symbol = "a"
         elif mime_main == "video":
-            mime_symbol = "/"
+            mime_symbol = "v"
         elif mime_main == "application":
-            mime_symbol = "*"
+            mime_symbol = "b"
         else:
             mime_symbol = "?"
         # if index is even then it will print at right of the terminal

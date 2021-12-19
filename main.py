@@ -3,6 +3,7 @@ import shutil
 from userlib import format, software
 import json
 from sys import argv as sys_args
+import getpass
 
 try:
     import readline
@@ -14,6 +15,12 @@ import platform
 
 
 def main():
+    software.clear()
+    # get script directory
+    script_directory = os.path.dirname(os.path.realpath(__file__))
+
+    user = getpass.getuser()
+
     if platform.system() == "Windows":
         if input(
                 "This program is not made for Windows, some features may not work. Do you want to continue? (y/n)") \
@@ -23,7 +30,7 @@ def main():
             exit()
 
     # Get software info and print
-    info = json.load(open("./kitsune.json"))
+    info = json.load(open(f"{script_directory}/kitsune.json"))
 
     # Gets the current current_path
     current_path = os.getcwd()
@@ -38,6 +45,8 @@ def main():
     files = []
 
     while True:
+        if user == "root":
+            print("\033[31mYOU ARE RUNNING AS ROOT\033[0m")
         try:
             print(f"KITSUNE PROJECT\nv{info['build']} - DEV: {info['dev']}\n{platform.system()}")
             # If the current path is an empty string, current path is defined to "/"
