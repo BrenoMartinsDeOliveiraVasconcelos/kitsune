@@ -3,14 +3,25 @@ import shutil
 from userlib import format, software
 import json
 from sys import argv as sys_args
-import readline
+
+try:
+    import readline
+
+    readline.clear_history()
+except ModuleNotFoundError:
+    readline = ""
 import platform
 
 
-readline.clear_history()
-
-
 def main():
+    if platform.system() == "Windows":
+        if input(
+                "This program is not made for Windows, some features may not work. Do you want to continue? (y/n)") \
+                == "y":
+            pass
+        else:
+            exit()
+
     # Get software info and print
     info = json.load(open("./kitsune.json"))
 
@@ -61,7 +72,7 @@ def main():
 
             if cmd == "cd":
                 old_path = current_path
-                cd_to = current_path+"/"+raw_args
+                cd_to = current_path + "/" + raw_args
                 # Checks if the cd target exists
                 # Checking if is different from "/"
                 if os.path.exists(cd_to) and raw_args != "/":
@@ -111,10 +122,10 @@ def main():
                     software.pause()
             elif cmd == "copy":
                 # copy files and directories
-                source = current_path+f"/{arr[0]}"
+                source = current_path + f"/{arr[0]}"
                 target = " ".join(arr[1:])
                 if target[0] != "/":
-                    target = current_path+f"/{target}"
+                    target = current_path + f"/{target}"
                 if os.path.isdir(source):
                     shutil.copytree(source, target)
                 else:
@@ -122,7 +133,7 @@ def main():
             elif cmd == "remove":
                 target = raw_args
                 if not target.startswith("/"):
-                    target = current_path+"/"+raw_args
+                    target = current_path + "/" + raw_args
                 if not os.path.isdir(target):
                     os.remove(target)
                 else:
