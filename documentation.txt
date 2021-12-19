@@ -1,6 +1,0 @@
-KITSUNE is a command line based file explorer made using Python.
-
-1 - Basic navigation
-    1.1 - Change directory writing its name
-    You can change current directory by typing its name.
-
