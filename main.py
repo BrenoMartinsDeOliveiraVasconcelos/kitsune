@@ -44,7 +44,7 @@ def main():
                 software.error(2)
                 current_path = os.getcwd()
 
-            format.s_print(files)
+            format.s_print(files, current_path)
 
             # Gets user input, then gets the command and args
             user_input = input("> ")
