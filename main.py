@@ -1,6 +1,6 @@
 import os
 import shutil
-from library import format, software
+from library import software
 import json
 from sys import argv as sys_args
 import getpass
@@ -64,7 +64,7 @@ def main():
                 software.error(2)
                 current_path = os.getcwd()
 
-            format.s_print(files, current_path)
+            software.s_print(files, current_path)
 
             # Gets user input, then gets the command and args
             user_input = input("> ")
